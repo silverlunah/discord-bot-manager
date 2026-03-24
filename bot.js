@@ -34,10 +34,13 @@ client.on("messageCreate", async (message) => {
   // Ignore bot messages
   if (message.author.bot) return;
 
+  // Check if the bot was mentioned in the message
+  if (!message.mentions.has(client.user)) return;
+
   try {
-    // Strip mentions of the bot from message content
+    // Strip the bot mention from message content
     const input = message.content.replace(/<@!?(\d+)>/g, "").trim();
-    if (!input) return; // ignore empty messages
+    if (!input) return; // ignore empty messages after mention
 
     console.log("Received message:", message.content);
 
@@ -57,7 +60,7 @@ client.on("messageCreate", async (message) => {
       timeout: 15000, // 15 seconds
     });
 
-    // Removed reply to Discord message
+    // No reply from bot directly
   } catch (err) {
     console.error("Error sending message to AI:", err.message);
   }
