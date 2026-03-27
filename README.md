@@ -39,8 +39,8 @@ Add as many bots as you need — each gets its own Discord client.
 cp .env.example .env
 ```
 
-| Variable | Description |
-|---|---|
+| Variable          | Description                                                    |
+| ----------------- | -------------------------------------------------------------- |
 | `N8N_AUTH_HEADER` | Authorization header value sent with every n8n webhook request |
 
 ### 4. Run

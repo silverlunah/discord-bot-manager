@@ -3,6 +3,13 @@ const { Client, GatewayIntentBits } = require("discord.js");
 const axios = require("axios");
 const fs = require("fs");
 const path = require("path");
+require("dotenv").config();
+
+const N8N_AUTH_HEADER = process.env.N8N_AUTH_HEADER;
+if (!N8N_AUTH_HEADER) {
+  console.error("Missing environment variable: N8N_AUTH_HEADER");
+  process.exit(1);
+}
 
 // Load bot configs from bots.json
 const configPath = path.resolve(__dirname, "bots.json");
@@ -66,6 +73,7 @@ function startBot({ name, token, webhookUrl, sessionId }) {
       await axios.post(webhookUrl, payload, {
         headers: {
           "Content-Type": "application/json",
+          "Authorization": N8N_AUTH_HEADER,
         },
         timeout: 15000, // 15 seconds
       });
