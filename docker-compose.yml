@@ -4,3 +4,5 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: unless-stopped
+    volumes:
+      - ./bots.json:/usr/src/app/bots.json:ro
