@@ -22,4 +22,3 @@ The user wants to add a new bot called "$ARGUMENTS" to `bots.json`.
    ```
 3. Write the updated array back to `bots.json`
 4. Tell the user which fields they still need to fill in
-   sss
