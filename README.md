@@ -1,0 +1,64 @@
+# discord-bot-manager
+
+A lightweight Discord bot manager that runs multiple bots in a single process. Each bot listens for mentions and forwards messages to an n8n webhook for AI processing.
+
+## Setup
+
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Configure your bots
+
+Copy the example config and fill in your values:
+
+```bash
+cp bots.example.json bots.json
+```
+
+`bots.json` accepts an array of bot configs:
+
+```json
+[
+  {
+    "name": "my-bot",
+    "token": "YOUR_DISCORD_BOT_TOKEN",
+    "webhookUrl": "https://your-n8n-instance/webhook/...",
+    "sessionId": "your-session-id"
+  }
+]
+```
+
+Add as many bots as you need — each gets its own Discord client.
+
+### 3. Configure environment variables
+
+```bash
+cp .env.example .env
+```
+
+| Variable | Description |
+|---|---|
+| `N8N_AUTH_HEADER` | Authorization header value sent with every n8n webhook request |
+
+### 4. Run
+
+```bash
+node bot.js
+```
+
+## Docker
+
+```bash
+docker-compose up -d
+```
+
+`bots.json` is mounted into the container as a volume, so you can update it without rebuilding the image.
+
+## How it works
+
+1. Each bot listens for messages where it is mentioned
+2. Strips the mention and forwards the text to its configured n8n webhook URL
+3. n8n handles the AI response and replies back to Discord

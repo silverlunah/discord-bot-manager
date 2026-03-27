@@ -1,5 +1,5 @@
 services:
-  discord-bot-aiyu:
+  discord-bot-manager:
     build:
       context: .
       dockerfile: Dockerfile
