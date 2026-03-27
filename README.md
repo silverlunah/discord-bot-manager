@@ -1,6 +1,6 @@
 # discord-bot-manager
 
-A lightweight Discord bot manager that runs multiple bots in a single process. Each bot listens for mentions and forwards messages to a webhook for AI processing.
+A lightweight Discord bot manager that runs multiple bots in a single process. Each bot listens for mentions and forwards messages to a webhook for AI processing. Perfect for n8n and other projects!
 
 ## Setup
 
@@ -39,8 +39,8 @@ Add as many bots as you need — each gets its own Discord client.
 cp .env.example .env
 ```
 
-| Variable          | Description                                                    |
-| ----------------- | -------------------------------------------------------------- |
+| Variable          | Description                                                |
+| ----------------- | ---------------------------------------------------------- |
 | `N8N_AUTH_HEADER` | Authorization header value sent with every webhook request |
 
 ### 4. Run
