@@ -46,7 +46,7 @@ cp .env.example .env
 ### 4. Run
 
 ```bash
-node bot.js
+npm start
 ```
 
 ## Docker
@@ -56,6 +56,15 @@ docker-compose up -d
 ```
 
 `bots.json` is mounted into the container as a volume, so you can update it without rebuilding the image.
+
+## Claude Code Skills
+
+This repo includes Claude Code skills for common tasks:
+
+| Skill | Usage | Description |
+| ----- | ----- | ----------- |
+| `add-bot` | `/add-bot <bot-name>` | Adds a new bot entry to `bots.json` with placeholder values |
+| `make-pr` | `/make-pr <pr-title>` | Creates a branch, commits changes, and opens a pull request |
 
 ## How it works
 
