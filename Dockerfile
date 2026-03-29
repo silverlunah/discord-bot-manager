@@ -17,4 +17,4 @@ COPY . .
 ENV NODE_ENV=production
 
 # Start the bot
-CMD ["node", "bot.js"]
+CMD ["npm", "start"]
