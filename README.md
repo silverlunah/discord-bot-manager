@@ -133,6 +133,7 @@ Every event forwards a JSON payload to the bot's `webhookUrl`.
   "sessionId": "your-session-id",
   "chatInput": "the user's message",
   "channelId": "channel-id",
+  "userId": "user-id",
   "isDM": false
 }
 ```
