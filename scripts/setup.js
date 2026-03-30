@@ -38,6 +38,24 @@ const files = [
           },
         ],
       },
+      {
+        name: "stop",
+        description: "Stop a website stack",
+        owner: "my-bot",
+        webhookAction: "stop",
+        options: [
+          {
+            name: "website",
+            description: "Which website to stop",
+            type: "choices",
+            required: true,
+            choices: [
+              { name: "My Site", value: "my-site" },
+              { name: "Shop", value: "shop-site" },
+            ],
+          },
+        ],
+      },
     ],
   },
 ];
