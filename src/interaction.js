@@ -57,7 +57,7 @@ async function handleInteraction(interaction, { name, webhookUrl, commands, sess
     );
 
     clearInterval(loadingInterval);
-    await interaction.editReply(isDeploy ? "Deploy kicked off!" : "Request received.");
+    await interaction.editReply(isDeploy ? `Deploy kicked off for **${options.website}**!` : "Request received.");
   } catch (err) {
     clearInterval(loadingInterval);
     log.error(name, "Error sending slash command to n8n:", err.message);
