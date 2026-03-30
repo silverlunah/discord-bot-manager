@@ -1,0 +1,34 @@
+[
+  {
+    "name": "deploy",
+    "description": "Deploy a website to the server",
+    "owner": "my-bot",
+    "webhookAction": "deploy",
+    "options": [
+      {
+        "name": "website",
+        "description": "Which website to deploy",
+        "type": "choices",
+        "required": true,
+        "choices": [
+          { "name": "My Site", "value": "my-site" },
+          { "name": "Shop", "value": "shop-site" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "restart",
+    "description": "Restart a service on the server",
+    "owner": "my-bot",
+    "webhookAction": "restart",
+    "options": [
+      {
+        "name": "service",
+        "description": "Name of the service to restart (free text)",
+        "type": "string",
+        "required": true
+      }
+    ]
+  }
+]

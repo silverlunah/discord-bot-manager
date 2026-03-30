@@ -1,0 +1,10 @@
+[
+  {
+    "name": "my-bot",
+    "clientId": "YOUR_BOT_CLIENT_ID",
+    "serverId": "YOUR_DISCORD_SERVER_ID",
+    "token": "YOUR_DISCORD_BOT_TOKEN",
+    "webhookUrl": "https://your-n8n-instance/webhook/...",
+    "sessionId": "your-session-id"
+  }
+]
