@@ -50,7 +50,7 @@ async function handleInteraction(
 
     await interaction.editReply(
       isDeploy
-        ? `Deploy requested for **${options.website}** repository. Please wait`
+        ? `Deploy requested for **${options.website}** repository. Please wait... ⏳`
         : "Request received.",
     );
   } catch (err) {
