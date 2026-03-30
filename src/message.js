@@ -20,8 +20,6 @@ async function handleMessage(message, { name, webhookUrl, sessionId, client }) {
         sessionId,
         chatInput: input,
         channelId: message.channelId,
-        guildId: message.guildId ?? null,
-        userId: message.author.id,
         isDM,
       },
       {
