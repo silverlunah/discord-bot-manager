@@ -20,6 +20,7 @@ async function handleMessage(message, { name, webhookUrl, sessionId, client }) {
         sessionId,
         chatInput: input,
         channelId: message.channelId,
+        userId: message.author.id,
         isDM,
       },
       {
