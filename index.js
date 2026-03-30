@@ -56,7 +56,7 @@ function startBot({ name, token, webhookUrl, sessionId }) {
   );
 
   client.on("interactionCreate", (interaction) =>
-    handleInteraction(interaction, { name, webhookUrl, commands }),
+    handleInteraction(interaction, { name, webhookUrl, commands, sessionId }),
   );
 
   client.login(token);
