@@ -1,7 +1,7 @@
 const axios = require("axios");
 const log = require("./logger");
 
-async function handleInteraction(interaction, { name, webhookUrl, commands }) {
+async function handleInteraction(interaction, { name, webhookUrl, commands, sessionId }) {
   if (!interaction.isChatInputCommand()) return;
 
   const cmd = commands.find(
@@ -32,6 +32,7 @@ async function handleInteraction(interaction, { name, webhookUrl, commands }) {
         // Passed so n8n can follow up via Discord API if needed
         interactionToken: interaction.token,
         interactionId: interaction.id,
+        ...(cmd.webhookAction === "deploy" && { sessionId }),
       },
       {
         headers: {
