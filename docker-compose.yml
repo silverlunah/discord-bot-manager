@@ -1,5 +1,5 @@
 services:
-  discord-bot-manager:
+  n8n-discord-bot-manager:
     build:
       context: .
       dockerfile: Dockerfile
