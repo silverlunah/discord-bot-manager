@@ -40,19 +40,6 @@ const files = [
       },
     ],
   },
-  {
-    dest: "loading-messages.json",
-    content: [
-      "Warming up the servers...",
-      "Pushing code to the cloud...",
-      "Convincing the servers to cooperate...",
-      "Compiling at ludicrous speed...",
-      "Wiring everything together...",
-      "Almost there, probably...",
-      "Deploying pixels and vibes...",
-      "Running the gnarly build script...",
-    ],
-  },
 ];
 
 for (const { dest, content } of files) {
