@@ -3,10 +3,11 @@
   "version": "1.0.1",
   "main": "index.js",
   "scripts": {
+    "prepare": "node scripts/setup.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "bot": "node index.js",
     "deploy": "node deploy-commands.js",
-    "start": "npm run deploy && npm run bot"
+    "start": "node scripts/setup.js && node deploy-commands.js && node index.js"
   },
   "keywords": [],
   "author": "",

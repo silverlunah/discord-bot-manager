@@ -7,6 +7,7 @@ A lightweight Discord bot manager that runs multiple bots in a single process. E
 - Run multiple bots from one process
 - Respond to mentions in channels and direct messages
 - Slash commands with dropdown choices or free text options
+- Loading animation during long-running slash commands (e.g. deploy)
 - All config in one place — no code changes needed to add bots or commands
 
 ## Prerequisites
@@ -23,6 +24,8 @@ A lightweight Discord bot manager that runs multiple bots in a single process. E
 npm install
 ```
 
+This also runs the setup script which creates any missing config files in `config/` with placeholder values.
+
 ### 2. Configure environment
 
 Copy the example and fill in your values:
@@ -37,11 +40,7 @@ N8N_AUTH_HEADER=your-auth-header-value
 
 ### 3. Configure your bots
 
-```bash
-cp config/bots.example.json config/bots.json
-```
-
-Edit `config/bots.json`:
+Edit `config/bots.json` (created by setup with placeholders):
 
 ```json
 [
@@ -66,11 +65,7 @@ Edit `config/bots.json`:
 
 ### 4. (Optional) Configure slash commands
 
-```bash
-cp config/commands.example.json config/commands.json
-```
-
-Edit `config/commands.json` to define your commands. Each command is tied to a bot via the `owner` field (must match the bot's `name`).
+Edit `config/commands.json` (created by setup with placeholders). Each command is tied to a bot via the `owner` field (must match the bot's `name`).
 
 Two option types are supported:
 
@@ -114,13 +109,25 @@ Two option types are supported:
 }
 ```
 
-### 5. Run
+### 5. (Optional) Customize deploy loading messages
+
+Edit `config/loading-messages.json` to change what the bot says while a deploy is running:
+
+```json
+[
+  "Warming up the servers...",
+  "Pushing code to the cloud...",
+  "Almost there, probably..."
+]
+```
+
+### 6. Run
 
 ```bash
 npm start
 ```
 
-This registers slash commands with Discord first, then starts the bot. Re-run whenever you update `config/commands.json`.
+This runs setup, registers slash commands with Discord, then starts the bot. Re-run whenever you update `config/commands.json`.
 
 ## n8n Integration
 
@@ -147,19 +154,30 @@ Every event forwards a JSON payload to the bot's `webhookUrl`.
   "channelId": "channel-id",
   "guildId": "server-id",
   "interactionToken": "...",
-  "interactionId": "..."
+  "interactionId": "...",
+  "sessionId": "your-session-id"
 }
 ```
+
+> `sessionId` is only included in the payload when `webhookAction` is `deploy`.
 
 Use `isDM` to route message replies (channel vs DM). Use `interactionToken` + `interactionId` if you want n8n to send a follow-up response to a slash command via the Discord API.
 
 ## Docker
 
+Make sure your `.env` and `config/` files are in place first, then:
+
 ```bash
 docker-compose up -d
 ```
 
-The `config/` directory is mounted as a volume so you can update bots and commands without rebuilding.
+The `config/` directory is mounted as a writable volume — the setup script will create any missing config files with placeholders on first boot. Secrets (`bots.json`, `commands.json`, `.env`) are excluded from the image via `.dockerignore`.
+
+To rebuild after code changes:
+
+```bash
+docker-compose up -d --build
+```
 
 ## Claude Code Skills
 
@@ -175,6 +193,7 @@ This repo includes Claude Code skills for common tasks:
 
 | Command | Description |
 |---------|-------------|
-| `npm start` | Deploy commands then start the bot |
-| `npm run bot` | Start the bot only |
+| `npm start` | Run setup, register slash commands, then start the bot |
+| `npm run bot` | Start the bot only (skips setup and command registration) |
 | `npm run deploy` | Register slash commands with Discord only |
+| `npm run prepare` | Create missing config files with placeholders (runs automatically on `npm install`) |
