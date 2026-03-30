@@ -38,6 +38,7 @@ function startBot({ name, token, webhookUrl, sessionId }) {
       GatewayIntentBits.Guilds,
       GatewayIntentBits.GuildMessages,
       GatewayIntentBits.MessageContent,
+      GatewayIntentBits.DirectMessages,
     ],
   });
 
@@ -51,13 +52,14 @@ function startBot({ name, token, webhookUrl, sessionId }) {
     // Ignore bot messages
     if (message.author.bot) return;
 
-    // Check if this bot was mentioned in the message
-    if (!message.mentions.has(client.user)) return;
+    // Allow DMs or messages where the bot is mentioned
+    const isDM = message.channel.type === 1; // ChannelType.DM = 1
+    if (!isDM && !message.mentions.has(client.user)) return;
 
     try {
-      // Strip the bot mention from message content
+      // Strip the bot mention from message content (no-op for DMs)
       const input = message.content.replace(/<@!?(\d+)>/g, "").trim();
-      if (!input) return; // ignore empty messages after mention
+      if (!input) return; // ignore empty messages
 
       console.log(`[${name}] Received message:`, message.content);
 
@@ -67,6 +69,7 @@ function startBot({ name, token, webhookUrl, sessionId }) {
         sessionId: sessionId,
         chatInput: input,
         channelId: message.channelId,
+        isDM: isDM,
       };
 
       // Send to n8n webhook
