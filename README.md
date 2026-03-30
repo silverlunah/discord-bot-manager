@@ -161,6 +161,16 @@ docker-compose up -d
 
 The `config/` directory is mounted as a volume so you can update bots and commands without rebuilding.
 
+## Claude Code Skills
+
+This repo includes Claude Code skills for common tasks:
+
+| Skill | Usage | Description |
+| ----- | ----- | ----------- |
+| `add-bot` | `/add-bot <bot-name>` | Adds a new bot entry to `config/bots.json` with placeholder values |
+| `add-command` | `/add-command <command-name>` | Adds a new slash command entry to `config/commands.json` |
+| `make-pr` | `/make-pr <pr-title>` | Creates a branch, commits changes, and opens a pull request |
+
 ## Scripts
 
 | Command | Description |
