@@ -133,6 +133,7 @@ Every event forwards a JSON payload to the bot's `webhookUrl`.
   "sessionId": "your-session-id",
   "chatInput": "the user's message",
   "channelId": "channel-id",
+  "guildId": "server-id",
   "userId": "user-id",
   "isDM": false
 }
@@ -152,7 +153,7 @@ Every event forwards a JSON payload to the bot's `webhookUrl`.
 }
 ```
 
-Use `isDM` to route message replies (channel vs DM). Use `interactionToken` + `interactionId` if you want n8n to send a follow-up response to a slash command via the Discord API.
+Use `isDM` to route message replies. When `isDM` is `true`, `channelId` is the DM channel — use `guildId` to look up or hardcode a server channel to reply to instead. Use `interactionToken` + `interactionId` if you want n8n to send a follow-up response to a slash command via the Discord API.
 
 ## Docker
 
