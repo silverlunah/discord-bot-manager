@@ -1,6 +1,5 @@
 const axios = require("axios");
 const log = require("./logger");
-const DEPLOY_LOADING_MESSAGES = require("../config/loading-messages.json");
 
 async function handleInteraction(interaction, { name, webhookUrl, commands, sessionId }) {
   if (!interaction.isChatInputCommand()) return;
@@ -19,16 +18,6 @@ async function handleInteraction(interaction, { name, webhookUrl, commands, sess
   }
 
   const isDeploy = cmd.webhookAction === "deploy";
-  let loadingInterval;
-
-  if (isDeploy) {
-    let msgIndex = 0;
-    await interaction.editReply(DEPLOY_LOADING_MESSAGES[0]);
-    loadingInterval = setInterval(async () => {
-      msgIndex = (msgIndex + 1) % DEPLOY_LOADING_MESSAGES.length;
-      await interaction.editReply(DEPLOY_LOADING_MESSAGES[msgIndex]);
-    }, 2500);
-  }
 
   try {
     log.info(name, `Slash command /${interaction.commandName}:`, options);
@@ -56,10 +45,8 @@ async function handleInteraction(interaction, { name, webhookUrl, commands, sess
       },
     );
 
-    clearInterval(loadingInterval);
     await interaction.editReply(isDeploy ? `Deploy kicked off for **${options.website}**!` : "Request received.");
   } catch (err) {
-    clearInterval(loadingInterval);
     log.error(name, "Error sending slash command to n8n:", err.message);
     await interaction.editReply("Failed to process command.");
   }

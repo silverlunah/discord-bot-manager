@@ -7,7 +7,6 @@ A lightweight Discord bot manager that runs multiple bots in a single process. E
 - Run multiple bots from one process
 - Respond to mentions in channels and direct messages
 - Slash commands with dropdown choices or free text options
-- Loading animation during long-running slash commands (e.g. deploy)
 - All config in one place — no code changes needed to add bots or commands
 
 ## Prerequisites
@@ -109,19 +108,7 @@ Two option types are supported:
 }
 ```
 
-### 5. (Optional) Customize deploy loading messages
-
-Edit `config/loading-messages.json` to change what the bot says while a deploy is running:
-
-```json
-[
-  "Warming up the servers...",
-  "Pushing code to the cloud...",
-  "Almost there, probably..."
-]
-```
-
-### 6. Run
+### 5. Run
 
 ```bash
 npm start
