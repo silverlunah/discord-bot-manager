@@ -1,7 +1,10 @@
 const axios = require("axios");
 const log = require("./logger");
 
-async function handleInteraction(interaction, { name, webhookUrl, commands, sessionId }) {
+async function handleInteraction(
+  interaction,
+  { name, webhookUrl, commands, sessionId },
+) {
   if (!interaction.isChatInputCommand()) return;
 
   const cmd = commands.find(
@@ -45,7 +48,11 @@ async function handleInteraction(interaction, { name, webhookUrl, commands, sess
       },
     );
 
-    await interaction.editReply(isDeploy ? `Deploy kicked off for **${options.website}**!` : "Request received.");
+    await interaction.editReply(
+      isDeploy
+        ? `Deploy requested for **${options.website}** repository. Please wait`
+        : "Request received.",
+    );
   } catch (err) {
     log.error(name, "Error sending slash command to n8n:", err.message);
     await interaction.editReply("Failed to process command.");
