@@ -1,5 +1,5 @@
 // bot.js
-const { Client, GatewayIntentBits } = require("discord.js");
+const { Client, GatewayIntentBits, Partials } = require("discord.js");
 const axios = require("axios");
 const fs = require("fs");
 const path = require("path");
@@ -40,6 +40,7 @@ function startBot({ name, token, webhookUrl, sessionId }) {
       GatewayIntentBits.MessageContent,
       GatewayIntentBits.DirectMessages,
     ],
+    partials: [Partials.Channel],
   });
 
   // On ready
